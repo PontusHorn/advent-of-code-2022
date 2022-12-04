@@ -1,18 +1,11 @@
 mod day01;
 
 use std::env;
-use std::process;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    let file_path = parse_args(&args).unwrap_or_else(|err| {
-        eprintln!("Problem parsing arguments: {err}");
-        process::exit(1);
-    });
-    let result = day01::part1(file_path).unwrap_or_else(|err| {
-        eprintln!("Problem running task for {file_path}: {err}");
-        process::exit(1);
-    });
+    let file_path = parse_args(&args).expect("Problem parsing arguments");
+    let result = day01::part1(file_path).expect(&format!("Problem running task for {file_path}"));
     println!("{result}");
 }
 
