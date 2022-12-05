@@ -1,8 +1,10 @@
+use super::shared::{get_score, Move, Outcome};
 use crate::input::read_lines;
 use std::{error, fmt};
 
 type Result<T> = std::result::Result<T, Box<dyn error::Error>>;
 
+#[allow(dead_code)]
 pub fn run(file_path: &str) -> Result<u32> {
     read_lines(file_path)?
         .map(|line| -> Result<u32> {
@@ -36,20 +38,6 @@ impl fmt::Display for ParseError {
             }
         }
     }
-}
-
-#[derive(Debug)]
-pub enum Move {
-    Rock,
-    Paper,
-    Scissors,
-}
-
-#[derive(Debug)]
-pub enum Outcome {
-    Win,
-    Loss,
-    Draw,
 }
 
 #[derive(Debug)]
@@ -118,19 +106,4 @@ fn get_outcome(moves: &Moves) -> Outcome {
             own: Move::Scissors,
         } => Outcome::Draw,
     }
-}
-
-pub fn get_score(own_move: &Move, outcome: &Outcome) -> u32 {
-    let move_score = match own_move {
-        Move::Rock => 1,
-        Move::Paper => 2,
-        Move::Scissors => 3,
-    };
-    let outcome_score = match outcome {
-        Outcome::Loss => 0,
-        Outcome::Draw => 3,
-        Outcome::Win => 6,
-    };
-
-    move_score + outcome_score
 }
