@@ -1,7 +1,7 @@
 mod days;
 mod input;
 
-use days::day02::part2::run;
+use days::day03::part1::run;
 use std::env;
 
 fn main() {

@@ -4,6 +4,7 @@ use std::{error, fmt};
 
 type Result<T> = std::result::Result<T, Box<dyn error::Error>>;
 
+#[allow(dead_code)]
 pub fn run(file_path: &str) -> Result<u32> {
     read_lines(file_path)?
         .map(|line| -> Result<u32> {
