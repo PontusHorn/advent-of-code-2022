@@ -1,6 +1,7 @@
 use super::shared::{get_common_item, get_item_priority, Items, Result};
 use crate::input::read_lines;
 
+#[allow(dead_code)]
 pub fn run(file_path: &str) -> Result<u32> {
     read_lines(file_path)?
         .map(|line| Ok(line?.chars().collect::<Items>()))
