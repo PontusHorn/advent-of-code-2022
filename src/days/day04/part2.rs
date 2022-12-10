@@ -2,6 +2,7 @@ use super::shared::{get_range_pairs, RangePair, Result};
 use crate::input::read_lines;
 use std::io;
 
+#[allow(dead_code)]
 pub fn run(file_path: &str) -> Result<usize> {
     let lines = read_lines(file_path)?
         .collect::<io::Result<Vec<_>>>()
