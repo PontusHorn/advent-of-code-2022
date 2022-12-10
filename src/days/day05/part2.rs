@@ -1,7 +1,6 @@
 use super::shared::{get_stacks, lift_crates, place_crates, Crate, Move, Result, Stack, Stacks};
 use crate::input::read_lines;
 
-#[allow(dead_code)]
 pub fn run(file_path: &str) -> Result<String> {
     let stacks = get_stacks(file_path)?;
     let Stacks(rearranged_stacks) = move_crates(file_path, stacks)?;
@@ -31,10 +30,8 @@ fn move_crates(file_path: &str, Stacks(stacks): Stacks) -> Result<Stacks> {
 
     for line in instruction_lines {
         let Move { count, from, to } = line?.parse::<Move>()?;
-        for _ in 1..=count {
-            let (new_stacks, moved_crates) = lift_crates(&rearranged_stacks, &from, &1)?;
-            rearranged_stacks = place_crates(&new_stacks, &to, moved_crates)?;
-        }
+        let (new_stacks, moved_crates) = lift_crates(&rearranged_stacks, &from, &count)?;
+        rearranged_stacks = place_crates(&new_stacks, &to, moved_crates)?;
     }
 
     Ok(rearranged_stacks)
