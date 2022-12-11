@@ -1,6 +1,7 @@
 use super::shared::{get_stacks, lift_crates, place_crates, Crate, Move, Result, Stack, Stacks};
 use crate::input::read_lines;
 
+#[allow(dead_code)]
 pub fn run(file_path: &str) -> Result<String> {
     let stacks = get_stacks(file_path)?;
     let Stacks(rearranged_stacks) = move_crates(file_path, stacks)?;
