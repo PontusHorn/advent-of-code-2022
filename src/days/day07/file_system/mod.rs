@@ -13,13 +13,19 @@ use std::collections::HashMap;
 #[derive(Debug)]
 pub struct FileSystem {
     directories: HashMap<String, Directory>,
+    total_space: u32,
 }
 
 impl FileSystem {
     pub fn new() -> Self {
         Self {
             directories: HashMap::new(),
+            total_space: u32::MAX,
         }
+    }
+
+    pub fn set_total_space(&mut self, space: u32) {
+        self.total_space = space;
     }
 
     pub fn add_directory(&mut self, directory: Directory) {
@@ -49,6 +55,14 @@ impl FileSystem {
             .filter(|(p, _)| *p == path || p.starts_with(&format!("{}/", path)))
             .map(|(_, d)| d.size())
             .sum::<u32>()
+    }
+
+    fn get_used_size(&self) -> u32 {
+        self.get_directory_size("")
+    }
+
+    pub fn get_available_space(&self) -> u32 {
+        self.total_space - self.get_used_size()
     }
 }
 

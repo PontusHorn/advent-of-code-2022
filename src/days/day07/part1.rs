@@ -2,6 +2,7 @@ use super::file_system::FileSystem;
 use crate::input::read_lines;
 use std::{error, result};
 
+#[allow(dead_code)]
 pub fn run(file_path: &str) -> Result<u32> {
     let lines = read_lines(file_path)?;
     let fs: FileSystem = lines.try_into()?;
