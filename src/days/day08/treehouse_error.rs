@@ -6,6 +6,7 @@ use super::tree_grid::TreeGridError;
 pub enum TreehouseError {
     IoError(io::Error),
     TreeGridError(TreeGridError),
+    NoSuitableTreeError,
 }
 
 impl error::Error for TreehouseError {}
@@ -14,6 +15,9 @@ impl fmt::Display for TreehouseError {
         match self {
             TreehouseError::IoError(err) => err.fmt(f),
             TreehouseError::TreeGridError(err) => err.fmt(f),
+            TreehouseError::NoSuitableTreeError => {
+                write!(f, "No suitable tree found")
+            }
         }
     }
 }
